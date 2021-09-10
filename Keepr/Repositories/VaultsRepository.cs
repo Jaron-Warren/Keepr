@@ -20,5 +20,18 @@ namespace Keepr.Repositories
       string sql = "SELECT * FROM vaults;";
       return _db.Query<Vault>(sql).ToList();
     }
+
+    internal Vault Create(Vault newVault)
+    {
+      string sql = @"
+      INSERT INTO vaults
+      (name, description, isPrivate, creatorId)
+      VALUES
+      (@Name, @Description, @IsPrivate, @CreatorId);
+      SELECT LAST_INSERT_ID()
+      ;";
+      newVault.Id = _db.ExecuteScalar<int>(sql, newVault);
+      return newVault;
+    }
   }
 }
