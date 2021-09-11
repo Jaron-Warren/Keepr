@@ -30,6 +30,11 @@ namespace Keepr.Services
       return found;
     }
 
+    internal List<Keep> GetProfileKeeps(string id)
+    {
+      return _repo.GetProfileKeeps(id);
+    }
+
     internal Keep Create(Keep newKeep)
     {
       return _repo.Create(newKeep);
@@ -48,6 +53,7 @@ namespace Keepr.Services
       _repo.Edit(original);
       return original;
     }
+
 
     internal void Delete(int keepId, string userId)
     {

@@ -38,6 +38,12 @@ namespace Keepr.Repositories
       }, new { id }, splitOn: "id").FirstOrDefault();
     }
 
+    internal List<Keep> GetProfileKeeps(string id)
+    {
+      string sql = "SELECT * FROM keeps WHERE creatorId = @id;";
+      return _db.Query<Keep>(sql, new { id }).ToList();
+    }
+
     internal Keep Create(Keep newKeep)
     {
       string sql = @"

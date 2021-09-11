@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
 
@@ -17,6 +18,11 @@ namespace Keepr.Services
     // {
     //   return _repo.GetAll();
     // }
+
+    internal List<Vault> GetProfileVaults(string id)
+    {
+      return _repo.GetProfileVaults(id);
+    }
 
     internal Vault GetById(int id)
     {
