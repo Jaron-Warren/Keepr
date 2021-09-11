@@ -33,5 +33,29 @@ namespace Keepr.Services
       return _repo.Create(newVault);
     }
 
+    internal Vault Edit(Vault updatedVault)
+    {
+      Vault original = GetById(updatedVault.Id);
+      if (original.CreatorId != updatedVault.CreatorId)
+      {
+        throw new Exception("not yours!");
+      }
+      original.Name = updatedVault.Name ?? original.Name;
+      original.IsPrivate = updatedVault.IsPrivate ?? original.IsPrivate;
+      original.Description = updatedVault.Description != null ? updatedVault.Description : original.Description;
+      _repo.Edit(original);
+      return original;
+    }
+
+    internal void Delete(int vaultId, string userId)
+    {
+      Vault toDelete = GetById(vaultId);
+      if (toDelete.CreatorId != userId)
+      {
+        throw new Exception("That doesn't belong to you!");
+      }
+      _repo.Delete(vaultId);
+    }
+
   }
 }

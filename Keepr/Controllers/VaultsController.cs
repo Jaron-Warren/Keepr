@@ -65,5 +65,39 @@ namespace Keepr.Controllers
       }
     }
 
+    [HttpPut("{id}")]
+    [Authorize]
+    public async Task<ActionResult<Vault>> Edit([FromBody] Vault updatedVault, int id)
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        updatedVault.CreatorId = userInfo.Id;
+        updatedVault.Id = id;
+        Vault vault = _service.Edit(updatedVault);
+        return Ok(vault);
+      }
+      catch (Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize]
+    public async Task<ActionResult<Vault>> Delete(int id)
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        _service.Delete(id, userInfo.Id);
+        return Ok("vault has been deleted");
+      }
+      catch (Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
+
   }
 }
