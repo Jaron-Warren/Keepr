@@ -14,10 +14,12 @@ namespace Keepr.Controllers
   public class VaultsController : ControllerBase
   {
     private readonly VaultsService _service;
+    private readonly VaultKeepsService _vkService;
 
-    public VaultsController(VaultsService service)
+    public VaultsController(VaultsService service, VaultKeepsService vkService)
     {
       _service = service;
+      _vkService = vkService;
     }
 
     // [HttpGet]
@@ -41,6 +43,20 @@ namespace Keepr.Controllers
       {
         Vault vault = _service.GetById(id);
         return Ok(vault);
+      }
+      catch (Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
+
+    [HttpGet("{id}/keeps")]
+    public ActionResult<List<VaultKeepsViewModel>> GetVaultKeeps(int id)
+    {
+      try
+      {
+        List<VaultKeepsViewModel> keeps = _vkService.GetVaultKeeps(id);
+        return Ok(keeps);
       }
       catch (Exception err)
       {

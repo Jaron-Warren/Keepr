@@ -27,6 +27,7 @@ namespace Keepr.Services
         throw new Exception("Invalid Id");
       }
       found.Views++;
+      _repo.EditStats(found);
       return found;
     }
 
@@ -64,6 +65,5 @@ namespace Keepr.Services
       }
       _repo.Delete(keepId);
     }
-
   }
 }

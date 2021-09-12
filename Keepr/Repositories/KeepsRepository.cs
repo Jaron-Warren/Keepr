@@ -71,6 +71,20 @@ namespace Keepr.Repositories
       return updatedKeep;
     }
 
+    internal Keep EditStats(Keep updatedKeep)
+    {
+      string sql = @"
+      UPDATE keeps
+      SET
+        views = @Views,
+        keeps = @Keeps,
+        shares = @Shares
+      WHERE id = @id
+      ;";
+      _db.Execute(sql, updatedKeep);
+      return updatedKeep;
+    }
+
     internal void Delete(int keepId)
     {
       string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
