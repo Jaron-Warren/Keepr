@@ -10,16 +10,28 @@ namespace Keepr.Services
     private readonly VaultKeepsRepository _vkrepo;
     private readonly KeepsRepository _keepsrepo;
     private readonly VaultsRepository _vaultsrepo;
+    private readonly VaultsService _vaultsservice;
 
-    public VaultKeepsService(VaultKeepsRepository vkrepo, KeepsRepository keepsrepo, VaultsRepository vaultsrepo)
+    public VaultKeepsService(VaultKeepsRepository vkrepo, KeepsRepository keepsrepo, VaultsRepository vaultsrepo, VaultsService vaultsservice)
     {
       _vkrepo = vkrepo;
       _keepsrepo = keepsrepo;
       _vaultsrepo = vaultsrepo;
+      _vaultsservice = vaultsservice;
     }
 
+    internal List<VaultKeepsViewModel> GetVaultKeepsAuth(int vaultId, string userinfoId)
+    {
+      Vault vault = _vaultsservice.GetById(vaultId);
+      if (vault.IsPrivate == true && vault.CreatorId != userinfoId)
+      {
+        throw new Exception("Invalid Id");
+      }
+      return _vkrepo.GetVaultKeeps(vaultId);
+    }
     internal List<VaultKeepsViewModel> GetVaultKeeps(int vaultId)
     {
+      Vault vault = _vaultsservice.GetById(vaultId);
       return _vkrepo.GetVaultKeeps(vaultId);
     }
 

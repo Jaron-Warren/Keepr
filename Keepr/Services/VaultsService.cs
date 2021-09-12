@@ -19,17 +19,41 @@ namespace Keepr.Services
     //   return _repo.GetAll();
     // }
 
-    internal List<Vault> GetProfileVaults(string id)
+    // REVIEW why doesn't this work?
+    internal List<Vault> GetProfileVaults(string id, string userId = "null")
     {
-      return _repo.GetProfileVaults(id);
+      List<Vault> vaults = _repo.GetProfileVaults(id);
+      if (vaults[0] != null && userId != vaults[0].CreatorId)
+      {
+        vaults.RemoveAll(v => v.IsPrivate == true);
+      }
+      return vaults;
     }
 
-    internal Vault GetById(int id)
+    internal Vault GetByIdAuth(int vaultId, string userId)
     {
-      Vault found = _repo.GetById(id);
+      Vault found = _repo.GetById(vaultId);
       if (found == null)
       {
         throw new Exception("Invalid Id");
+      }
+      if (found.IsPrivate == true && found.CreatorId != userId)
+      {
+        throw new Exception("Bad request");
+      }
+      return found;
+    }
+
+    internal Vault GetById(int vaultId)
+    {
+      Vault found = _repo.GetById(vaultId);
+      if (found == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      if (found.IsPrivate == true)
+      {
+        throw new Exception("Bad request");
       }
       return found;
     }
