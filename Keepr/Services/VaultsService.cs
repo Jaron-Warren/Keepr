@@ -19,7 +19,6 @@ namespace Keepr.Services
     //   return _repo.GetAll();
     // }
 
-    // REVIEW why doesn't this work?
     internal List<Vault> GetProfileVaults(string id, string userId = "null")
     {
       List<Vault> vaults = _repo.GetProfileVaults(id);

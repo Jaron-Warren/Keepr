@@ -12,6 +12,7 @@ namespace Keepr.Models
     public int Views { get; set; }
     public int Shares { get; set; }
     public int Keeps { get; set; }
+    public string Tags { get; set; }
     public Profile Creator { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }

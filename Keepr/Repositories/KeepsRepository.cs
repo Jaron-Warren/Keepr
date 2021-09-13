@@ -48,9 +48,9 @@ namespace Keepr.Repositories
     {
       string sql = @"
       INSERT INTO keeps
-      (name, description, creatorId, img)
+      (name, description, creatorId, img, tags)
       VALUES
-      (@Name, @Description, @CreatorId, @Img);
+      (@Name, @Description, @CreatorId, @Img, @Tags);
       SELECT LAST_INSERT_ID()
       ;";
       newKeep.Id = _db.ExecuteScalar<int>(sql, newKeep);

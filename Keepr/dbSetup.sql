@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS accounts(
   Gender VARCHAR(255) COMMENT 'Male or Female?',
   Country VARCHAR(255) COMMENT 'User Country'
 ) default charset utf8 COMMENT '';
--- DROP TABLE vaultkeep;
+-- DELETE FROM keeps;
 CREATE TABLE IF NOT EXISTS vaults(
   id int NOT NULL AUTO_INCREMENT primary key COMMENT 'primary key',
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS keeps(
   views INT COMMENT 'item user views',
   shares INT COMMENT 'item user shares',
   keeps INT COMMENT 'item user keeps',
+  tags VARCHAR(255) COMMENT 'item search tags',
   creatorId VARCHAR(255) NOT NULL COMMENT 'creator id',
   FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';

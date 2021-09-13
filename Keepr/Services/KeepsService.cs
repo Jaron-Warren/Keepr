@@ -38,6 +38,14 @@ namespace Keepr.Services
 
     internal Keep Create(Keep newKeep)
     {
+      //REVIEW how does this work?
+      // if (newKeep.Tags != null)
+      // {
+      //   List<string>tags = newKeep.Tags.Split(",");
+      //   for (int i = 0; i < newKeep.Tags.; i++)
+      //   {
+      //   }
+      // }
       return _repo.Create(newKeep);
     }
 
