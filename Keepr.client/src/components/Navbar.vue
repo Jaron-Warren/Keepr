@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar nvheight navbar-expand-lg navbar-dark bg-primary">
     <button
       class="navbar-toggler"
       type="button"
@@ -12,9 +12,22 @@
       <span class="navbar-toggler-icon" />
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
+      <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+        <div class="d-flex flex-column align-items-center">
+          <img
+            alt="logo"
+            src="../assets/img/k_icon.svg"
+            height="45"
+          />
+        </div>
+      </router-link>
+      <form onsubmit="" class="mx-auto">
+        <input type="text">
+      </form>
+      <!-- account dropdown -->
       <span class="navbar-text">
         <button
-          class="btn btn-outline-primary text-uppercase"
+          class="btn btn-secondary text-uppercase"
           @click="login"
           v-if="!user.isAuthenticated"
         >
@@ -53,6 +66,7 @@
           </div>
         </div>
       </span>
+      <!-- account dropdown -->
     </div>
   </nav>
 </template>
@@ -101,5 +115,12 @@ a:hover {
 }
 .nav-item .nav-link.router-link-exact-active{
   color: var(--primary);
+}
+.homeicon{
+  max-height: 100%;
+  width: auto;
+}
+.nvheight{
+  max-height: 11vh;
 }
 </style>
