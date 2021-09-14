@@ -1,6 +1,6 @@
 <template>
   <div class="about text-center">
-    <div v-if="!keeps.length" class="loader">
+    <div v-if="!account" class="loader">
     </div>
   </div>
 </template>

@@ -52,7 +52,7 @@
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <router-link :to="{ name: 'Profile' }">
+            <router-link :to="{ name: 'Profile', params: {id: account.id} }">
               <div class="list-group-item list-group-item-action bg-secondary text-light hoverable">
                 Profile
               </div>
@@ -83,6 +83,7 @@ export default {
     return {
       state,
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },

@@ -1,13 +1,13 @@
 <template>
   <KeepModal :keep="keep" />
   <div class="Keep">
-    <div class="card action" data-toggle="modal" :data-target="'#keepModal' + keep.id">
+    <div class="card action" data-toggle="modal" :data-target="'#keepModal' + keep.id" @click="getKeep()">
       <img :src="keep.img" class="card-img" :alt="keep.name">
       <div class="kname text-light imgtxt">
         {{ keep.name }}
       </div>
       <img
-        :src="user.picture"
+        :src="keep?.creator.picture"
         alt="user photo"
         height="40"
         class="rounded kcreatorimg"
@@ -19,6 +19,7 @@
 <script>
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { keepService } from '../services/KeepService'
 export default {
   props: {
     keep: {
@@ -26,9 +27,12 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
     return {
-      user: computed(() => AppState.user)
+      user: computed(() => AppState.user),
+      getKeep() {
+        keepService.getById(props.keep.id)
+      }
     }
   }
 }
