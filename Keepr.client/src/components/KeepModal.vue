@@ -7,31 +7,53 @@
        aria-labelledby="modelTitleId"
        aria-hidden="true"
   >
-    <form class="modal-dialog" role="document" @submit.prevent="deleteKeep">
-      <div class="modal-content">
-        <div class="modal-header bg-dark bcolor bthick">
-          <h2 class="modal-title">
-            Edit keep Report
-          </h2>
-          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body bg-dark">
-          <div class="container-fluid">
-            <div class="mb-3" v-if="user.isAuthenticated">
-              <img :src="account.picture" alt="picture" class="mr-2">
-              {{ account.name }}
+    <form class="modal-dialog modal-dialog-centered modal-xl" role="document" @submit.prevent="deleteKeep">
+      <div class="modal-content bg-light">
+        <div class="modal-body">
+          <div class="conatiner-fluid">
+            <div class="row">
+              <div class="col-lg-6 pr-0">
+                <img class="kimg" :src="keep.img" :alt="keep.name">
+              </div>
+              <div class="col-lg-6 d-flex flex-column">
+                <div>
+                  <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                    <span class="f-24" aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="mt-2 mb-4">
+                  <img src="src\assets\img\eye-plus.png" alt="views">
+                  <span>&ensp;{{ keep.views }} &ensp;</span>
+                  <img src="src\assets\img\k_title.png" alt="keeps" height="24" width="24">
+                  <span>&ensp;{{ keep.keeps }} &ensp;</span>
+                  <img src="src\assets\img\share-variant.png" alt="share">
+                  <span>&ensp;{{ keep.shares }} &ensp;</span>
+                </div>
+                <h2 class="modal-title border-bottom">
+                  {{ keep.name }}
+                </h2>
+                <div class="d-flex flex-grow-1 flex-column">
+                  <div class="my-auto">
+                    {{ keep.description }}
+                  </div>
+                  <div class="my-auto border-top border-bottom">
+                    tags
+                  </div>
+                  <div class="my-auto">
+                    creator
+                  </div>
+                </div>
+                <div class="mt-auto justify-content-around d-flex">
+                  <button type="button" class="btn btn-primary" data-toggle data-target>
+                    Add to Vault
+                  </button>
+                  <button type="submit" class="btn" data-dismiss="modal" v-if="account?.id == keep.creatorId">
+                    <img src="src\assets\img\delete-outline.png" alt="delete" height="32" width="32">
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer bg-dark bcolor bthick">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">
-            Close
-          </button>
-          <button type="button" class="btn btn-success" data-toggle data-target>
-            Confirm
-          </button>
         </div>
       </div>
     </form>
@@ -54,7 +76,7 @@ export default {
   },
   setup(props) {
     return {
-      user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async deleteKeep() {
         try {
           keepService.delete()
@@ -85,5 +107,9 @@ export default {
   position: absolute;
   bottom: 8px;
   right: 16px;
+}
+.kimg{
+  width: 100%;
+  max-height: auto;
 }
 </style>

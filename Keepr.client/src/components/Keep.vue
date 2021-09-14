@@ -1,7 +1,8 @@
 <template>
+  <KeepModal :keep="keep" />
   <div class="Keep">
-    <div class="card">
-      <img :src="keep.img" class="card-img action" :alt="keep.name">
+    <div class="card action" data-toggle="modal" :data-target="'#keepModal' + keep.id">
+      <img :src="keep.img" class="card-img" :alt="keep.name">
       <div class="kname text-light imgtxt">
         {{ keep.name }}
       </div>
