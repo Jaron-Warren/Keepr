@@ -1,6 +1,7 @@
 <template>
   <div class="about">
-    <h1>This is the about page</h1>
+    <div v-if="!keeps.length" class="loader">
+    </div>
   </div>
 </template>
 
