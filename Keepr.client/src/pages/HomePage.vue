@@ -1,5 +1,5 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center mt-5 container">
+  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center mt-4 container">
     <div v-if="!keeps.length" class="loader">
     </div>
     <div class="card-columns">

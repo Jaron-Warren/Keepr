@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar nvheight navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <button
       class="navbar-toggler"
       type="button"
@@ -34,7 +34,7 @@
           Login
         </button>
 
-        <div class="dropdown" v-else>
+        <div class="dropdown bg-secondary text-light p-1 rounded" v-else>
           <div
             class="dropdown-toggle"
             @click="state.dropOpen = !state.dropOpen"
@@ -48,17 +48,17 @@
             <span class="mx-3">{{ user.name }}</span>
           </div>
           <div
-            class="dropdown-menu p-0 list-group w-100"
+            class="dropdown-menu p-0 m-0 border-0 list-group w-100 rounded"
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
             <router-link :to="{ name: 'Profile' }">
-              <div class="list-group-item list-group-item-action hoverable">
+              <div class="list-group-item list-group-item-action bg-secondary text-light hoverable">
                 Profile
               </div>
             </router-link>
             <div
-              class="list-group-item list-group-item-action hoverable"
+              class="list-group-item list-group-item-action bg-secondary text-light hoverable"
               @click="logout"
             >
               logout
