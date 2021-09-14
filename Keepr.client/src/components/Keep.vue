@@ -7,7 +7,7 @@
         {{ keep.name }}
       </div>
       <img
-        :src="keep?.creator.picture"
+        :src="keep.creator?.picture"
         alt="user photo"
         height="40"
         class="rounded kcreatorimg"
@@ -19,7 +19,7 @@
 <script>
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { keepService } from '../services/KeepService'
+import { keepsService } from '../services/KeepsService'
 export default {
   props: {
     keep: {
@@ -31,7 +31,7 @@ export default {
     return {
       user: computed(() => AppState.user),
       getKeep() {
-        keepService.getById(props.keep.id)
+        keepsService.getById(props.keep.id)
       }
     }
   }

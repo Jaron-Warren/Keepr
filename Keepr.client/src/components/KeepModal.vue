@@ -73,7 +73,7 @@
 <script>
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { keepService } from '../services/KeepService'
+import { keepsService } from '../services/KeepsService'
 import Pop from '../utils/Notifier'
 import $ from 'jquery'
 
@@ -91,7 +91,7 @@ export default {
       async deleteKeep() {
         try {
           if (await Pop.confirm('Confirm Delete', 'this can\'t be undone!', 'warning')) {
-            await keepService.delete(props.keep.id)
+            await keepsService.delete(props.keep.id)
           }
         } catch (error) {
           Pop.toast(error)

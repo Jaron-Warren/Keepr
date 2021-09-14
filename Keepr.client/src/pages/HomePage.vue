@@ -13,14 +13,14 @@
 <script>
 import { computed, onMounted } from '@vue/runtime-core'
 import Pop from '../utils/Notifier'
-import { keepService } from '../services/KeepService'
+import { keepsService } from '../services/KeepsService'
 import { AppState } from '../AppState'
 export default {
   name: 'Home',
   setup() {
     onMounted(async() => {
       try {
-        keepService.getAll()
+        keepsService.getAll()
       } catch (error) {
         Pop.toast(error, 'error')
       }

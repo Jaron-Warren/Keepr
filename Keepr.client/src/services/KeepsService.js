@@ -3,7 +3,7 @@ import { logger } from '../utils/Logger'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
 
-class KeepService {
+class KeepsService {
   async getAll() {
     try {
       const res = await api.get('api/keeps')
@@ -36,4 +36,4 @@ class KeepService {
   }
 }
 
-export const keepService = new KeepService()
+export const keepsService = new KeepsService()
