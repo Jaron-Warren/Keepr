@@ -7,8 +7,8 @@
         <img class="rounded" :src="profile.picture" alt="profile picture">
         <div class="pl-3">
           <h2>{{ profile.name }}</h2>
-          <div>Vaults:{{}}</div>
-          <div>Keeps:{{}}</div>
+          <h5>Vaults:{{}}</h5>
+          <h5>Keeps:{{}}</h5>
         </div>
       </div>
       <div class="col-12 py-4">
@@ -16,13 +16,18 @@
           Vaults
           <span class="f-24 ml-2 pb-1 text-primary action bg-secondary rounded">&ensp;+&ensp;</span>
         </h3>
+        <div class="pt-2 row">
+          <div class="p-2 col-md-3 col-sm-6" v-for="v in vaults" :key="v.id">
+            <Vault :vault="v" />
+          </div>
+        </div>
       </div>
       <div class="col-12 py-4">
         <h3>
           Keeps
           <span class="f-24 ml-2 pb-1 text-primary action bg-secondary rounded">&ensp;+&ensp;</span>
         </h3>
-        <div class="card-columns">
+        <div class="card-columns pt-3">
           <div v-for="k in keeps" :key="k.id">
             <Keep :keep="k" />
           </div>
@@ -46,6 +51,7 @@ export default {
     onMounted(async() => {
       try {
         await profilesService.getById(route.params.id)
+        await profilesService.getVaultsById(route.params.id)
         await profilesService.getKeepsById(route.params.id)
       } catch (error) {
         Pop.toast(error, 'error')
@@ -53,7 +59,8 @@ export default {
     })
     return {
       profile: computed(() => AppState.activeProfile),
-      keeps: computed(() => AppState.activeProfileKeeps)
+      keeps: computed(() => AppState.activeProfileKeeps),
+      vaults: computed(() => AppState.activeProfileVaults)
     }
   }
 }

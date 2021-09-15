@@ -16,8 +16,18 @@ class ProfilesService {
   async getKeepsById(id) {
     try {
       const res = await api.get(`api/profiles/${id}/keeps`)
-      console.log(res.data)
+      // console.log(res.data)
       AppState.activeProfileKeeps = res.data
+    } catch (error) {
+      logger.log('Unable to retrieve profile')
+    }
+  }
+
+  async getVaultsById(id) {
+    try {
+      const res = await api.get(`api/profiles/${id}/vaults`)
+      // console.log(res.data)
+      AppState.activeProfileVaults = res.data
     } catch (error) {
       logger.log('Unable to retrieve profile')
     }
