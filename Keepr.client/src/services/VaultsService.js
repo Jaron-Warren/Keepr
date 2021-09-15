@@ -7,8 +7,8 @@ class VaultsService {
   async getById(id) {
     try {
       const res = await api.get(`api/vaults/${id}`)
-      console.log(res.data)
-      AppState.activeProfileVaults = res.data
+      // console.log(res.data)
+      AppState.activeVault = res.data
     } catch (error) {
       logger.log(error)
     }
@@ -26,8 +26,8 @@ class VaultsService {
 
   async create(vault) {
     try {
-      const res = await api.create('api/vaults', vault)
-      // console.log(res.data)
+      const res = await api.post('api/vaults', vault)
+      console.log(res.data)
       AppState.activeProfileVaults.push(res.data)
     } catch (error) {
       logger.log(error)

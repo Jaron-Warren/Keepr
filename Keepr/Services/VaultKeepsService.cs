@@ -22,7 +22,7 @@ namespace Keepr.Services
 
     internal List<VaultKeepsViewModel> GetVaultKeepsAuth(int vaultId, string userinfoId)
     {
-      Vault vault = _vaultsservice.GetById(vaultId);
+      Vault vault = _vaultsservice.GetByIdAuth(vaultId, userinfoId);
       if (vault.IsPrivate == true && vault.CreatorId != userinfoId)
       {
         throw new Exception("Invalid Id");
@@ -32,6 +32,10 @@ namespace Keepr.Services
     internal List<VaultKeepsViewModel> GetVaultKeeps(int vaultId)
     {
       Vault vault = _vaultsservice.GetById(vaultId);
+      if (vault.IsPrivate == true)
+      {
+        throw new Exception("Invalid Id");
+      }
       return _vkrepo.GetVaultKeeps(vaultId);
     }
 

@@ -7,7 +7,7 @@
        aria-labelledby="modelTitleId"
        aria-hidden="true"
   >
-    <form class="modal-dialog" role="document" @submit.prevent="createVault">
+    <form class="modal-dialog" role="document" @submit.prevent="createVault()">
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title">
@@ -76,15 +76,19 @@ import $ from 'jquery'
 export default {
   setup() {
     const state = reactive({
-      newVault: {}
+      newVault: {
+        isPrivate: false
+      }
     })
     return {
       state,
       account: computed(() => AppState.account),
-      async createvault() {
+      async createVault() {
         const createdvault = await vaultsService.create(state.newVault)
-        state.newVault = {}
-        router.push({ name: 'Vault', params: { id: createdvault.id } })
+        state.newVault = {
+          isPrivate: false
+        }
+        // router.push({ name: 'Vault', params: { id: createdvault.id } })
         $('#createNewVault').modal('hide')
         $('body').removeClass('modal-open')
         $('.modal-backdrop').remove()

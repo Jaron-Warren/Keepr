@@ -1,19 +1,25 @@
 <template>
-  <div class="Vault flex-grow-1 d-flex flex-column align-items-center justify-content-center mt-4 container-fluid">
+  <div class="Vault container-fluid">
     <div class="row">
-      <div v-if="!keeps.length" class="loader">
+      <div v-if="!vault.name" class="loader">
       </div>
       <div class="col-12 d-flex py-4">
         <div class="pl-3">
           <h2>
             {{ vault.name }}
+            <span class="border border-primary text-muted f-14" v-if="vault.isPrivate">Private</span>
           </h2>
           <h5>Keeps: {{ keeps.length }}</h5>
         </div>
       </div>
-      <div class="card-columns">
-        <div v-for="k in keeps" :key="k.id">
-          <Keep :keep="k" />
+      <div class="col-12 text-center" v-if="!keeps.length">
+        <h5>Empty Vault :(</h5>
+      </div>
+      <div class="col-12">
+        <div class="card-columns">
+          <div v-for="k in keeps" :key="k.id">
+            <Keep :keep="k" />
+          </div>
         </div>
       </div>
     </div>
