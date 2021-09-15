@@ -1,17 +1,19 @@
 <template>
   <div class="Vault">
-    <div class="card action" :title="vault.description">
-      <img src="src\assets\img\product_vault_icon.svg" class="card-img vault">
-      <div class="kname text-primary bg-secondary rounded">
-        <b>&ensp;{{ vault.name }}&ensp;</b>
+    <router-link :to="{ name: 'Vault', params: {id: vault.id} }">
+      <div class="card d-flex" :title="vault.description">
+        <img src="src\assets\img\product_vault_icon.svg" class="card-img vault mx-auto">
+        <div class="kname text-primary bg-secondary rounded">
+          <b>&ensp;{{ vault.name }}&ensp;</b>
+        </div>
+        <img
+          :src="profile?.picture"
+          alt="user photo"
+          height="40"
+          class="rounded kcreatorimg"
+        />
       </div>
-      <img
-        :src="profile?.picture"
-        alt="user photo"
-        height="40"
-        class="rounded kcreatorimg"
-      />
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -26,9 +28,10 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
     return {
       profile: computed(() => AppState.activeProfile)
+
     }
   }
 }
