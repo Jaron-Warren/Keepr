@@ -78,7 +78,7 @@ namespace Keepr.Services
 
     internal void Delete(int vaultId, string userId)
     {
-      Vault toDelete = GetById(vaultId);
+      Vault toDelete = GetByIdAuth(vaultId, userId);
       if (toDelete.CreatorId != userId)
       {
         throw new Exception("That doesn't belong to you!");

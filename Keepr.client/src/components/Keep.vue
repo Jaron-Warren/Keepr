@@ -3,7 +3,7 @@
   <div class="Keep">
     <div class="card action" data-toggle="modal" :data-target="'#keepModal' + keep.id" @click="getKeep()">
       <img :src="keep.img" class="card-img" :alt="keep.name">
-      <div class="kname text-light imgtxt">
+      <div class="kname font-weight-bold text-light imgtxt">
         {{ keep.name }}
       </div>
       <img
@@ -29,7 +29,6 @@ export default {
   },
   setup(props) {
     return {
-      user: computed(() => AppState.user),
       getKeep() {
         keepsService.getById(props.keep.id)
       }

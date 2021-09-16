@@ -84,7 +84,7 @@ export default {
       state,
       account: computed(() => AppState.account),
       async createVault() {
-        const createdvault = await vaultsService.create(state.newVault)
+        await vaultsService.create(state.newVault)
         state.newVault = {
           isPrivate: false
         }

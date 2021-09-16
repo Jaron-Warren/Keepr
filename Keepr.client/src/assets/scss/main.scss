@@ -26,6 +26,10 @@ main {
 .action{
   cursor: pointer;
 }
+.actionhover:hover{
+  cursor: pointer;
+  transform: scale(1.07);
+}
 
 .imgtxt{
   text-shadow: 1px 1px 15px black;

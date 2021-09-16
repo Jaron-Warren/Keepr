@@ -2,9 +2,11 @@ import { api } from './AxiosService'
 import { logger } from '../utils/Logger'
 import { AppState } from '../AppState'
 import Pop from '../utils/Notifier'
+import { router } from '../router'
 
 class VaultsService {
   async getById(id) {
+    AppState.activeVault = {}
     try {
       const res = await api.get(`api/vaults/${id}`)
       // console.log(res.data)
@@ -17,8 +19,22 @@ class VaultsService {
   async getKeepsById(id) {
     try {
       const res = await api.get(`api/vaults/${id}/keeps`)
-      console.log(res.data)
-      AppState.activeVaultKeeps = res.data
+      // console.log(res.data)
+      AppState.keeps = res.data
+    } catch (error) {
+      logger.log(error)
+    }
+  }
+
+  async addKeep(keepid, vaultid) {
+    const vaultkeep = {
+      keepId: keepid,
+      vaultId: vaultid
+    }
+    try {
+      const res = await api.post('api/vaultkeeps', vaultkeep)
+      // console.log(res.data)
+      Pop.toast('Added to vault', 'success', 'top', 1500)
     } catch (error) {
       logger.log(error)
     }
@@ -27,19 +43,29 @@ class VaultsService {
   async create(vault) {
     try {
       const res = await api.post('api/vaults', vault)
-      console.log(res.data)
+      // console.log(res.data)
       AppState.activeProfileVaults.push(res.data)
     } catch (error) {
       logger.log(error)
     }
   }
 
-  async delete(id) {
+  async delete(id, accountid) {
     try {
       await api.delete(`api/vaults/${id}`)
       // console.log(res.data)
-      AppState.vaults = AppState.vaults.filter(k => k.id !== id)
+      router.push({ name: 'Profile', params: { id: accountid } })
       Pop.toast('vault deleted', 'success', 'top', 1500)
+    } catch (error) {
+      logger.log(error)
+    }
+  }
+
+  async removeKeep(id) {
+    try {
+      await api.delete(`api/VaultKeeps/${id}`)
+      // console.log(res.data)
+      Pop.toast('keep removed', 'success', 'top', 1500)
     } catch (error) {
       logger.log(error)
     }

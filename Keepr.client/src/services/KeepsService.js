@@ -28,7 +28,7 @@ class KeepsService {
     try {
       const res = await api.post('api/keeps', keep)
       // console.log(res.data)
-      AppState.activeProfileKeeps.push(res.data)
+      AppState.keeps.push(res.data)
     } catch (error) {
       logger.log(error)
     }

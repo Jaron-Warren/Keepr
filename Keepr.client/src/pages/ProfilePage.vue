@@ -16,10 +16,10 @@
       <div class="col-12 py-4">
         <h3>
           Vaults
-          <span class="f-24 ml-2 pb-1 text-primary action bg-secondary rounded" data-toggle="modal" data-target="#createNewVault" v-if="profile?.id == account.id">&ensp;+&ensp;</span>
+          <span class="f-24 ml-2 pb-1 text-primary action bg-secondary rounded" title="New Vault" data-toggle="modal" data-target="#createNewVault" v-if="profile?.id == account.id">&ensp;+&ensp;</span>
         </h3>
         <div class="pt-2 row">
-          <div class="p-2 col-md-3 col-sm-6" v-for="v in vaults" :key="v.id">
+          <div class="p-2 col-md-4 col-sm-6" v-for="v in vaults" :key="v.id">
             <Vault :vault="v" />
           </div>
         </div>
@@ -27,7 +27,7 @@
       <div class="col-12 py-4">
         <h3>
           Keeps
-          <span class="f-24 ml-2 pb-1 text-primary action bg-secondary rounded" data-toggle="modal" data-target="#createNewkeep" v-if="profile?.id == account.id">&ensp;+&ensp;</span>
+          <span class="f-24 ml-2 pb-1 text-primary action bg-secondary rounded" title="New keep" data-toggle="modal" data-target="#createNewkeep" v-if="profile?.id == account.id">&ensp;+&ensp;</span>
         </h3>
         <div class="card-columns pt-3">
           <div v-for="k in keeps" :key="k.id">
@@ -47,7 +47,7 @@ import { useRoute } from 'vue-router'
 import { profilesService } from '../services/ProfileService'
 
 export default {
-  name: 'Account',
+  name: 'ProfilePage',
   setup() {
     const route = useRoute()
     onMounted(async() => {
@@ -61,19 +61,21 @@ export default {
     })
     watch(() => route.params.id,
       async() => {
-        try {
-          await profilesService.getById(route.params.id)
-          await profilesService.getVaultsById(route.params.id)
-          await profilesService.getKeepsById(route.params.id)
-        } catch (error) {
-          Pop.toast(error, 'error')
+        if (route.name === 'Profile') {
+          try {
+            await profilesService.getById(route.params.id)
+            await profilesService.getVaultsById(route.params.id)
+            await profilesService.getKeepsById(route.params.id)
+          } catch (error) {
+            Pop.toast(error, 'error')
+          }
         }
       }
     )
     return {
       account: computed(() => AppState.account),
       profile: computed(() => AppState.activeProfile),
-      keeps: computed(() => AppState.activeProfileKeeps),
+      keeps: computed(() => AppState.keeps),
       vaults: computed(() => AppState.activeProfileVaults)
     }
   }

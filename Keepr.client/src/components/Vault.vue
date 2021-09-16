@@ -9,8 +9,15 @@
         <img
           :src="profile?.picture"
           alt="user photo"
-          height="40"
+          height="30"
           class="rounded kcreatorimg"
+        />
+        <img
+          src="src\assets\img\lock_private_protect_icon.svg"
+          alt="is private"
+          height="30"
+          class="privateimg"
+          v-if="vault.isPrivate"
         />
       </div>
     </router-link>
@@ -28,7 +35,7 @@ export default {
       required: true
     }
   },
-  setup(props) {
+  setup() {
     return {
       profile: computed(() => AppState.activeProfile)
 
@@ -53,7 +60,12 @@ export default {
   right: 16px;
 }
 .vault{
-  width: 10vw;
+  width: 30vw;
   height: auto;
+}
+.privateimg{
+    position: absolute;
+  top: 8px;
+  right: 60px;
 }
 </style>

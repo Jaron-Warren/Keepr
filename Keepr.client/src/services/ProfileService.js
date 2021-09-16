@@ -17,7 +17,7 @@ class ProfilesService {
     try {
       const res = await api.get(`api/profiles/${id}/keeps`)
       // console.log(res.data)
-      AppState.activeProfileKeeps = res.data
+      AppState.keeps = res.data
     } catch (error) {
       logger.log('Unable to retrieve profile')
     }

@@ -15,26 +15,29 @@
       <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
         <div class="d-flex flex-column align-items-center">
           <img
+            class="actionhover"
             alt="logo"
             src="../assets/img/k_icon.svg"
             height="45"
           />
         </div>
       </router-link>
-      <form onsubmit="" class="mx-auto">
+      <div class="mx-auto">
+      <!-- <form onsubmit="" class="mx-auto">
         <input type="text">
-      </form>
+      </form> -->
       <!-- account dropdown -->
+      </div>
       <span class="navbar-text">
         <button
-          class="btn btn-secondary text-uppercase"
+          class="btn btn-secondary text-uppercase action"
           @click="login"
           v-if="!user.isAuthenticated"
         >
           Login
         </button>
 
-        <div class="dropdown bg-secondary text-light p-1 rounded" v-else>
+        <div class="dropdown bg-secondary text-light p-1 rounded action" v-else>
           <div
             class="dropdown-toggle"
             @click="state.dropOpen = !state.dropOpen"
@@ -105,8 +108,9 @@ export default {
 .dropdown-menu.show {
   transform: scale(1);
 }
-.hoverable {
+.hoverable:hover {
   cursor: pointer;
+  transform: scale(1.012);
 }
 a:hover {
   text-decoration: none;

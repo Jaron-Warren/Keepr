@@ -16,7 +16,7 @@ import Pop from '../utils/Notifier'
 import { keepsService } from '../services/KeepsService'
 import { AppState } from '../AppState'
 export default {
-  name: 'Home',
+  name: 'HomePage',
   setup() {
     onMounted(async() => {
       try {

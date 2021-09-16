@@ -52,10 +52,10 @@ namespace Keepr.Services
     internal VaultKeep Create(VaultKeep newVK)
     {
       Keep keep = _keepsrepo.GetById(newVK.KeepId);
-      if (keep.CreatorId != newVK.CreatorId)
-      {
-        throw new Exception("Bad request");
-      }
+      // if (keep.CreatorId != newVK.CreatorId)
+      // {
+      //   throw new Exception("Bad request");
+      // }
       Vault vault = _vaultsrepo.GetById(newVK.VaultId);
       if (vault.CreatorId != newVK.CreatorId)
       {
