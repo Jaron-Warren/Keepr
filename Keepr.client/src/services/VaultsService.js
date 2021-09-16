@@ -45,6 +45,8 @@ class VaultsService {
       const res = await api.post('api/vaults', vault)
       // console.log(res.data)
       AppState.activeProfileVaults.push(res.data)
+      AppState.userVaults.push(res.data)
+      Pop.toast('vault created', 'success', 'top', 1500)
     } catch (error) {
       logger.log(error)
     }
@@ -55,6 +57,10 @@ class VaultsService {
       await api.delete(`api/vaults/${id}`)
       // console.log(res.data)
       router.push({ name: 'Profile', params: { id: accountid } })
+      // AppState.activeProfileVaults.filter(v => v.id !== id)
+      const res2 = await api.get(`/api/profiles/${accountid}/vaults`)
+      // console.log(res2.data)
+      AppState.userVaults = res2.data
       Pop.toast('vault deleted', 'success', 'top', 1500)
     } catch (error) {
       logger.log(error)

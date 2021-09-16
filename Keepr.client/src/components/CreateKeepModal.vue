@@ -59,7 +59,6 @@
                        v-model="state.newkeep.tags"
                        minlength="2"
                        maxlength="50"
-                       required
                 >
               </div>
               <i class="text-muted text-center">* seperate tags with a comma</i>

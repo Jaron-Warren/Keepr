@@ -33,7 +33,7 @@
                     title="Remove Keep"
                     data-dismiss="modal"
                     v-if="account?.id == vault.creatorId"
-                    @click="removeKeep(k.vaultKeepId)"
+                    @click="removeKeep(k.vaultKeepId, k)"
             >
               <span class="f-24 text-primary imgtxt" aria-hidden="true" title="Remove from vault">&times;</span>
             </button>
@@ -72,10 +72,11 @@ export default {
       keeps: computed(() => AppState.keeps),
       vault: computed(() => AppState.activeVault),
       account: computed(() => AppState.account),
-      async removeKeep(id) {
+      async removeKeep(vkid, k) {
         try {
           if (await Pop.confirm('Remove from vault?', '', 'question')) {
-            await vaultsService.removeKeep(id)
+            await vaultsService.removeKeep(vkid)
+            AppState.keeps = AppState.keeps.filter(keep => keep.id !== k.id)
           }
         } catch (error) {
           Pop.toast(error)

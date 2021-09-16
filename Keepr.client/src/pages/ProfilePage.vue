@@ -8,7 +8,7 @@
       <div class="col-12 d-flex py-4">
         <img :src="profile.picture" alt="profile picture">
         <div class="pl-3">
-          <h2>{{ profile.name }}</h2>
+          <h2>{{ profile.name?.split('@')[0] }}</h2>
           <h5>Vaults: {{ vaults.length }}</h5>
           <h5>Keeps: {{ keeps.length }}</h5>
         </div>

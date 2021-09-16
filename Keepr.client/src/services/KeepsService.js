@@ -29,6 +29,7 @@ class KeepsService {
       const res = await api.post('api/keeps', keep)
       // console.log(res.data)
       AppState.keeps.push(res.data)
+      Pop.toast('keep created', 'success', 'top', 1500)
     } catch (error) {
       logger.log(error)
     }
