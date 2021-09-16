@@ -9,8 +9,8 @@
             {{ vault.name }}
             <span class="bg-light border border-primary text-muted f-14" v-if="vault.isPrivate">Private</span>
             <button type="button"
-                    class="btn"
-                    title="Delete Keep"
+                    class="btn actionhover"
+                    title="Delete Vault"
                     data-dismiss="modal"
                     v-if="account?.id == vault.creatorId"
                     @click="deleteVault(vault)"
@@ -26,16 +26,16 @@
       </div>
       <div class="col-12">
         <div class="card-columns">
-          <div v-for="k in keeps" :key="k.id">
+          <div class="rel" v-for="k in keeps" :key="k.id">
             <Keep :keep="k" />
             <button type="button"
-                    class="btn"
-                    title="Delete Keep"
+                    class="btn p-0 actionhover kdelete"
+                    title="Remove Keep"
                     data-dismiss="modal"
                     v-if="account?.id == vault.creatorId"
                     @click="removeKeep(k.vaultKeepId)"
             >
-              <img src="src\assets\img\delete-outline.png" alt="delete" height="32" width="32">
+              <span class="f-24 text-primary imgtxt" aria-hidden="true" title="Remove from vault">&times;</span>
             </button>
           </div>
         </div>
@@ -51,7 +51,6 @@ import Pop from '../utils/Notifier'
 import { vaultsService } from '../services/VaultsService'
 import { AppState } from '../AppState'
 import { router } from '../router'
-import { keepsService } from '../services/KeepsService'
 
 export default {
   name: 'VaultPage',
@@ -75,8 +74,8 @@ export default {
       account: computed(() => AppState.account),
       async removeKeep(id) {
         try {
-          if (await Pop.confirm('Confirm Delete', 'this can\'t be undone!', 'warning')) {
-            await keepsService.delete(id)
+          if (await Pop.confirm('Remove from vault?', '', 'question')) {
+            await vaultsService.removeKeep(id)
           }
         } catch (error) {
           Pop.toast(error)
@@ -84,7 +83,7 @@ export default {
       },
       async deleteVault(vault) {
         try {
-          if (await Pop.confirm('Confirm Delete', 'this can\'t be undone!', 'warning')) {
+          if (await Pop.confirm('Delete Vault?', 'this can\'t be undone!', 'warning')) {
             await vaultsService.delete(vault.id, this.account.id)
           }
         } catch (error) {
@@ -95,3 +94,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.rel{
+  position: relative !important;
+  text-align: center !important;
+}
+.kdelete{
+  position: absolute;
+  top: 0px;
+  right: 16px;
+}
+</style>

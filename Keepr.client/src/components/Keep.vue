@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
-import { AppState } from '../AppState'
 import { keepsService } from '../services/KeepsService'
 export default {
   props: {

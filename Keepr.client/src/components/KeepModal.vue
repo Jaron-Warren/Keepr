@@ -61,7 +61,7 @@
                     </div>
                   </div>
                   <button type="button"
-                          class="btn"
+                          class="btn actionhover"
                           title="Delete Keep"
                           data-dismiss="modal"
                           v-if="account?.id == keep.creatorId"

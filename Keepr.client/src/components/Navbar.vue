@@ -15,6 +15,7 @@
       <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
         <div class="d-flex flex-column align-items-center">
           <img
+            title="Home"
             class="actionhover"
             alt="logo"
             src="../assets/img/k_icon.svg"
