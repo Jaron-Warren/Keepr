@@ -13,11 +13,14 @@
           <div class="conatiner-fluid">
             <div class="row">
               <div class="col-lg-6">
+                <button type="button" class="close ml-auto smallclose" data-dismiss="modal" aria-label="Close">
+                  <span class="f-24" aria-hidden="true" title="close">&times;</span>
+                </button>
                 <img class="kimg rounded" :src="keep.img" :alt="keep.name">
               </div>
               <div class="col-lg-6 d-flex flex-column">
                 <div>
-                  <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="close ml-auto bigclose" data-dismiss="modal" aria-label="Close">
                     <span class="f-24" aria-hidden="true" title="close">&times;</span>
                   </button>
                 </div>
@@ -127,6 +130,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media screen and (max-width: 992px) {
+  .smallclose {
+    display: block !important;
+  }
+  .bigclose {
+    display: none !important;
+  }
+}
+@media screen and (min-width: 993px) {
+  .smallclose {
+    display: none !important;
+  }
+    .bigclose {
+    display: block !important;
+  }
+}
 .card{
   position: relative !important;
   text-align: center !important;

@@ -2,7 +2,7 @@
   <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center mt-4 container-fluid">
     <div v-if="!keeps.length" class="loader">
     </div>
-    <div class="card-columns">
+    <div id="pics" class="card-columns">
       <div v-for="k in keeps" :key="k.id">
         <Keep :keep="k" />
       </div>
@@ -18,6 +18,10 @@ import { AppState } from '../AppState'
 export default {
   name: 'HomePage',
   setup() {
+    // window.addEventListener('load', () => {
+    //   const dom = document.getElementById('pics')
+    //   dom.classList = dom.classList.remove('d-none', '')
+    // })
     onMounted(async() => {
       try {
         keepsService.getAll()
